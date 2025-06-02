@@ -42,21 +42,19 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 ### 1. Lab VM Setup
 - 3 Virtual Machines (Debian x3):
   - Suricata Gateway (2 NICs)
-  - Web Server (Juice Shop + Open AppSec)
-  - Vulnerable Host (Metasploitable 2)
+  - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) + Open AppSec)
+  - Vulnerable Host ([Metasploitable 2](https://sourceforge.net/projects/metasploitable/))
 - 1 Kali Linux VM for attack simulation
 - 1 Wazuh server (already set up [here](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/edit/main/README.md#1-wazuh-server-setup))
 
 ### 2. IPTables and Network Routing
 - Debian Suricata machine set up as gateway with 2 NICs:
-  - eth0 — WAN (LAN side)
-  - eth1 — DMZ interface
+  - enp0s3 — WAN (LAN side)
+  - enp0s8 — DMZ interface
 - Configured IP forwarding and NAT
-- Configured iptables to forward and inspect DMZ traffic
+- Configured iptables to forward DMZ traffic
 
-📷 IPTables Rules
-📷 /etc/network/interfaces or nmcli settings
-📷 Traceroute/tcpdump showing routed packets
+📄[View the Report here](https://github.com/Apelsyn582/Network-Threat-Detection-and-Prevention-with-Suricata-and-Wazuh/blob/main/Full%20Step-by-Step%20Instruction%20for%20step%202.pdf)
 
 ### 3. Suricata Installation and Configuration
 Installed Suricata in IPS mode (NFQUEUE)
