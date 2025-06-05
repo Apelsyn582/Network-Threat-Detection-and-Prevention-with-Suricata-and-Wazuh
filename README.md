@@ -40,9 +40,9 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 ## 🧩 Key Steps
 
 ### 1. Lab VM Setup
-- 3 Virtual Machines (Debian x3):
-  - Suricata Gateway (2 NICs)
-  - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) + Open AppSec)
+- 3 Virtual Machines:
+  - Suricata Gateway
+  - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) on Debian 12 + Open AppSec)
   - Vulnerable Host ([Metasploitable 2](https://sourceforge.net/projects/metasploitable/))
 - 1 Kali Linux VM for attack simulation
 - 1 Wazuh server (already set up [here](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/edit/main/README.md#1-wazuh-server-setup))
@@ -56,27 +56,18 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 
 📄[View the Report here](https://github.com/Apelsyn582/Network-Threat-Detection-and-Prevention-with-Suricata-and-Wazuh/blob/main/Full%20Step-by-Step%20Instruction%20for%20step%202.pdf)
 
-### 3. Suricata Installation and Configuration
-Installed Suricata in IPS mode (NFQUEUE)
+### 3. Suricata Installation and Integration in Wazuh
 
-Set custom rules:
-- Port scan detection
-- OS fingerprinting detection
-- Service version scan
-- SQLi or XSS payloads
+##### Wazuh was installed and configured in [this](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/tree/main?tab=readme-ov-file#wazuh-siem-home-lab--detection-and-prevention-of-suspicious-activities) lab
+- Installed Suricata in IPS mode (NFQUEUE)
+- Installed Wazuh agent on Suricata Gateway
+- Configured log forwarding of /var/log/suricata/eve.json
+- Confirmed real-time alerts in Wazuh dashboard
 
 📷 /etc/suricata/suricata.yaml
 📷 EVE JSON logs
 📷 Suricata blocking traffic in real-time
 
-### 4. Wazuh Integration
-- Installed Wazuh agent on Suricata Gateway
-- Configured log forwarding of /var/log/suricata/eve.json
-- Confirmed real-time alerts in Wazuh dashboard
-
-📷 Wazuh alert
-📷 Agent status
-📷 Event with tag suricata.alert
 
 ### 5. Web Server and WAF (Open AppSec)
 
