@@ -45,7 +45,7 @@ The lab replicates SOC-level visibility and allows testing against simulated att
   - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) on Debian 12 + Open AppSec)
   - Vulnerable Host ([Metasploitable 2](https://sourceforge.net/projects/metasploitable/))
 - 1 Kali Linux VM for attack simulation
-- 1 Wazuh server (already set up [here](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/edit/main/README.md#1-wazuh-server-setup))
+- 1 Wazuh server (already set up [here](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/tree/main?tab=readme-ov-file#wazuh-siem-home-lab--detection-and-prevention-of-suspicious-activities))
 
 ### 2. IPTables and Network Routing
 - Debian Suricata machine set up as gateway with 2 NICs:
