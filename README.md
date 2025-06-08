@@ -59,7 +59,7 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 - Installed and configured Suricata
 - Installed Wazuh agent on Suricata Gateway
 - Create two custom rules to prevent Syn Scan Technique and Brute-force attack against Web app
-📄[All this steps you can check here]()
+📄[All this steps you can check here](Suricata Installation and Integration with Wazuh.pdf)
 
 
 ### 6. Attack Simulation - Rules Testing with Kali
