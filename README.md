@@ -1,12 +1,11 @@
 # Network-Threat-Detection-and-Prevention-with-Suricata-and-Wazuh
 
-This project documents the design, setup, and testing of a network-based threat detection and prevention lab using Suricata IDS/IPS, Wazuh SIEM, and Open AppSec WAF. The objective is to simulate real-world threats and verify the detection and prevention mechanism
+This project documents the design, setup, and testing of a network-based threat detection and prevention lab using Suricata IDS/IPS, Wazuh SIEM. The objective is to simulate real-world threats and verify the detection and prevention mechanism
 
 ## Project Overview
 The goal of this lab is to build a modular network security environment, where:
 
 - Suricata monitors and blocks malicious traffic at the network layer (IDS/IPS)
-- Open AppSec provides WAF protection for web applications
 - Wazuh aggregates logs and detects incidents
 
 The lab replicates SOC-level visibility and allows testing against simulated attacks from Kali Linux.
@@ -16,9 +15,8 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 - Deploy Suricata as an IPS gateway
 - Route all DMZ traffic through Suricata
 - Enable Suricata log forwarding to Wazuh
-- Protect the web server using Open AppSec WAF
-- Test custom Suricata rules (detection + blocking)
-- Simulate real attacks from Kali Linux and verify detection/prevention
+- Create custom Suricata rules (detection + blocking)
+- Test existing rules and custom rules using Kali Linux
 
 📷 **Lab Diagrame** 
 
@@ -32,7 +30,6 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 | Suricata          | IDS/IPS engine                         |
 | IPTables          | Routing & NFQUEUE integration          |
 | OWASP Juice Shop  | Web application in DMZ                 |
-| Open AppSec (WAF) | Web app firewall protecting Juice Shop |
 | Wazuh Server      | Log aggregation & alerting             |
 | Kali Linux        | Attacker VM                            |
 | Metasploitable2   | Additional vulnerable services in DMZ  |
@@ -42,7 +39,7 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 ### 1. Lab VM Setup
 - 3 Virtual Machines:
   - Suricata Gateway
-  - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) on Debian 12 + Open AppSec)
+  - Web Server ([Juice Shop](https://github.com/juice-shop/juice-shop) on Debian 12)
   - Vulnerable Host ([Metasploitable 2](https://sourceforge.net/projects/metasploitable/))
 - 1 Kali Linux VM for attack simulation
 - 1 Wazuh server (already set up [here](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/tree/main?tab=readme-ov-file#wazuh-siem-home-lab--detection-and-prevention-of-suspicious-activities))
@@ -59,28 +56,13 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 ### 3. Suricata Installation and Integration in Wazuh
 
 ##### Wazuh was installed and configured in [this](https://github.com/Apelsyn582/Wazuh-SIEM-Home-Lab-Detection-of-Suspicious-Activities/tree/main?tab=readme-ov-file#wazuh-siem-home-lab--detection-and-prevention-of-suspicious-activities) lab
-- Installed Suricata in IPS mode (NFQUEUE)
+- Installed and configured Suricata
 - Installed Wazuh agent on Suricata Gateway
-- Configured log forwarding of /var/log/suricata/eve.json
-- Confirmed real-time alerts in Wazuh dashboard
-
-📷 /etc/suricata/suricata.yaml
-📷 EVE JSON logs
-📷 Suricata blocking traffic in real-time
+- Create two custom rules to prevent Syn Scan Technique and Brute-force attack against Web app
+📄[All this steps you can check here]()
 
 
-### 5. Web Server and WAF (Open AppSec)
-
-- Installed Juice Shop via Docker or Node.js
-- Integrated Open AppSec (Docker or native)
-- Enabled protections (SQLi, RCE, XXE, etc.)
-- Tuned WAF logging
-
-📷 Juice Shop running
-📷 WAF dashboard / log entries
-📷 Blocked attack by WAF
-
-### 6. Attack Simulation from Kali
+### 6. Attack Simulation - Rules Testing with Kali
 Ran:
 - Nmap scans
 - Nikto/Dirb
@@ -90,12 +72,7 @@ Ran:
 - Suricata logs
 - Wazuh dashboard
 
-WAF logs
 
-📷 Terminal output of attack
-📷 Blocked alert in Wazuh
-📷 Suricata JSON log (with rule match)
-📷 AppSec WAF log (if triggered)
 
 ### 7. Analysis & Conclusion
 -Attack vector vs detection correlation
