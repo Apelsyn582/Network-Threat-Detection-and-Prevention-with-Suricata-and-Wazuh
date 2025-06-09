@@ -66,19 +66,81 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 ### 6. Attack Simulation - Rules Testing with Kali
 Ran:
 - Nmap scans
-- Nikto/Dirb
+- Nikto
 - SQLMap
-- Metasploit module or exploit
-- Verified detections in:
-- Suricata logs
+- Brute-force with Hydra
+Verified detections in:
 - Wazuh dashboard
 
+  ### Here is all attacks and alerts on it:
+  #### ➤ Perform a full port scan on the host at 192.168.100.3(Metasploitable 2) and detect service versions.
+  
+    ![Nmap_kali](images/Nmap_scan.png)
+    Find hidden or non-standard services and fingerprint versions for vulnerability assessment.
+    Here is alerts in Wazuh:
+  
+    ![Nmap_kali](images/nmap_alerts.png)
 
+    Two rules were triggered:
+      - 2023753 is from emerging-scan.rules that is comunity rules
+      - 40000003 is my custom rule
+ 
+  #### ➤ Scan the entire subnet to identify hosts and guess their operating systems.
 
-### 7. Analysis & Conclusion
--Attack vector vs detection correlation
--Prevention efficiency of Suricata vs WAF
--Wazuh's role in visibility & triage
--Possible next steps (add Honeypots, ELK, etc.)
+    ![Os fingerprint](images/Os_Fingerprint_scan.png)
+  
+    Here is alerts in Wazuh:
 
-📷 Summary Table of Detected Attacks
+    ![Os fingerprint](images/os_detection_alerts.png)
+  
+    you can see the alert of rule 2018489 that is from emerging-scan.rules that is comunity rules
+
+  #### ➤ Perform a SQL injection attack on DVWA(That is on Metasploitable 2) using an authenticated session.
+  
+    ![sql injection](images/sqlmap.png)
+  
+    Here is alerts in Wazuh:
+
+    ![sql injection](images/sql_alerts.png)
+
+    you can see the alert of rule 2053467 that is from emerging-sql.rules that is comunity rules
+
+  #### ➤ Brute-force login credentials for DVWA using the username admin and a password list.
+
+    ![Brute-force](images/brute_force_web.png)
+
+    Here is alerts in Wazuh:
+
+    ![Brute-force](images/hydra_alerts.png)
+
+    40000004 is my custom rule:
+
+    ![rule](images/rules.png)
+
+  #### ➤ Scan the web server at 192.168.100.2( OWASP Juice Shop ) for common vulnerabilities and misconfigurations.
+  
+   ![nikti](images/nikto.png)
+
+    Here is alerts in Wazuh:
+
+    ![nikto](images/nikto_alerts.png)
+
+   Here is all allerts triggered by nikto scan:
+
+   | alert             | attack type                            |
+   | ----------------- | -------------------------------------- |
+   | cmd=              | PHP Code Injection                     |
+   | /msadc/           | Old IIS Exploit                        |
+   | iissamples        | Sample Web Apps (IIS)                  |
+   | /etc/passwd       | Directory Traversal                    |
+   | <script>          | XSS                                    |
+   | cmd.exe           | RCE Attempt                            |
+   | viewcode          | Info Disclosure                        |
+
+    Source of rules is from emerging-web-server.rules that is comunity rules
+
+  
+
+### 7. Conclusion
+????????????
+
