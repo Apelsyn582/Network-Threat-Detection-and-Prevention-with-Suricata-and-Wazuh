@@ -63,84 +63,86 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 📄[All this steps you can check here](https://github.com/Apelsyn582/Network-Threat-Detection-and-Prevention-with-Suricata-and-Wazuh/blob/main/Suricata%20Installation%20and%20Integration%20with%20Wazuh.pdf)
 
 
-### 6. Attack Simulation - Rules Testing with Kali
-Ran:
-- Nmap scans
-- Nikto
-- SQLMap
-- Brute-force with Hydra
-Verified detections in:
-- Wazuh dashboard
+## 🛡️ Attack Simulations and Rule Testing
 
-  ### Here is all attacks and alerts on it:
-  #### ➤ Perform a full port scan on the host at 192.168.100.3(Metasploitable 2) and detect service versions.
-  
-    ![Nmap_kali](images/Nmap_scan.png)
-    Find hidden or non-standard services and fingerprint versions for vulnerability assessment.
-    Here is alerts in Wazuh:
-  
-    ![Nmap_kali](images/nmap_alerts.png)
+### 🔎 Nmap Full Port Scan
 
-    Two rules were triggered:
-      - 2023753 is from emerging-scan.rules that is comunity rules
-      - 40000003 is my custom rule
- 
-  #### ➤ Scan the entire subnet to identify hosts and guess their operating systems.
+- Target: `192.168.100.3` (Metasploitable 2)
+- Purpose: Service version fingerprinting
+- Alerts Triggered:
+  - **Rule 2023753** — Community (emerging-scan.rules)
+  - **Rule 40000003** — Custom rule
 
-    ![Os fingerprint](images/Os_Fingerprint_scan.png)
-  
-    Here is alerts in Wazuh:
+![Nmap Scan](images/Nmap_scan.png)
+![Nmap Alerts](images/nmap_alerts.png)
 
-    ![Os fingerprint](images/os_detection_alerts.png)
-  
-    you can see the alert of rule 2018489 that is from emerging-scan.rules that is comunity rules
+---
 
-  #### ➤ Perform a SQL injection attack on DVWA(That is on Metasploitable 2) using an authenticated session.
-  
-    ![sql injection](images/sqlmap.png)
-  
-    Here is alerts in Wazuh:
+### 🧠 OS Fingerprinting on Subnet
 
-    ![sql injection](images/sql_alerts.png)
+- Subnet Scan: Identify hosts and guess OS types
+- Alert: **Rule 2018489** — Community ruleset
 
-    you can see the alert of rule 2053467 that is from emerging-sql.rules that is comunity rules
+![OS Scan](images/Os_Fingerprint_scan.png)
+![OS Alerts](images/os_detection_alerts.png)
 
-  #### ➤ Brute-force login credentials for DVWA using the username admin and a password list.
+---
 
-    ![Brute-force](images/brute_force_web.png)
+### 💉 SQL Injection with SQLMap
 
-    Here is alerts in Wazuh:
+- Target: DVWA on Metasploitable 2 (authenticated session)
+- Alert: **Rule 2053467** — Community (emerging-sql.rules)
 
-    ![Brute-force](images/hydra_alerts.png)
+![SQLMap](images/sqlmap.png)
+![SQL Alerts](images/sql_alerts.png)
 
-    40000004 is my custom rule:
+---
 
-    ![rule](images/rules.png)
+### 🔓 Brute-force Attack with Hydra
 
-  #### ➤ Scan the web server at 192.168.100.2( OWASP Juice Shop ) for common vulnerabilities and misconfigurations.
-  
-   ![nikti](images/nikto.png)
+- Target: DVWA login page
+- Method: `admin` user with password list
+- Alert: **Rule 40000004** — Custom rule
 
-    Here is alerts in Wazuh:
+![Brute-force](images/brute_force_web.png)
+![Hydra Alerts](images/hydra_alerts.png)
+![Custom Rule](images/rules.png)
 
-    ![nikto](images/nikto_alerts.png)
+---
 
-   Here is all allerts triggered by nikto scan:
+### 🕵️ Vulnerability Scan with Nikto
 
-   | alert             | attack type                            |
-   | ----------------- | -------------------------------------- |
-   | cmd=              | PHP Code Injection                     |
-   | /msadc/           | Old IIS Exploit                        |
-   | iissamples        | Sample Web Apps (IIS)                  |
-   | /etc/passwd       | Directory Traversal                    |
-   | <script>          | XSS                                    |
-   | cmd.exe           | RCE Attempt                            |
-   | viewcode          | Info Disclosure                        |
+- Target: `192.168.100.2` (OWASP Juice Shop)
+- Multiple alerts triggered by:
+  - Directory traversal
+  - XSS
+  - RCE
+  - Info disclosure
+  - PHP code injection
 
-    Source of rules is from emerging-web-server.rules that is comunity rules
+| Alert Pattern       | Attack Type                  |
+|---------------------|------------------------------|
+| `cmd=`              | PHP Code Injection           |
+| `/msadc/`           | Old IIS Exploit              |
+| `iissamples`        | Sample Web Apps (IIS)        |
+| `/etc/passwd`       | Directory Traversal          |
+| `<script>`          | Cross-Site Scripting (XSS)   |
+| `cmd.exe`           | Remote Command Execution     |
+| `viewcode`          | Information Disclosure       |
 
-  
+![Nikto](images/nikto.png)
+![Nikto Alerts](images/nikto_alerts.png)
 
-### 7. Conclusion
-????????????
+---
 
+## ✅ Conclusion
+
+Throughout this lab, I successfully designed, deployed, and tested a network threat detection and prevention system using open-source tools Suricata and Wazuh. I gained hands-on experience in:
+
+- Configuring IPS at the network level with Suricata
+- Creating and testing custom detection rules
+- Simulating real-world attacks using Kali Linux
+- Aggregating and correlating alerts in a SIEM (Wazuh)
+- Working with community rulesets and fine-tuning signatures
+
+This project enhanced my skills in **network security**, **incident detection**, **threat simulation**, and **log correlation**.
