@@ -20,7 +20,7 @@ The lab replicates SOC-level visibility and allows testing against simulated att
 
 📷 **Lab Diagrame** 
 
-![Diagrame](images/diagrame.png) 
+<img src="images/diagrame.png" alt="config" width="600">
   
 ## 🧪 Tools and Technologies
 
